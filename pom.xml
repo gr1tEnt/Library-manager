@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Specifies the version of the POM model being used -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Basic project information -->
+    <groupId>com.gr1tEnt</groupId>  <!-- Group identifier for the project -->
+    <artifactId>library-manager</artifactId>  <!-- Artifact (project) identifier -->
+    <version>0.0.1-SNAPSHOT</version>  <!-- Version of the project (SNAPSHOT indicates it's a development version) -->
+
+    <build>
+        <plugins>
+            <!-- Maven Compiler Plugin to compile the source code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5</version>
+                <configuration>
+                    <source>1.8</source>  <!-- Java source version -->
+                    <target>1.8</target>  <!-- Java target version -->
+                    <annotationProcessors>
+                        <!-- Configures Lombok annotation processor -->
+                        <annotationProcessor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Assembly Plugin to create an executable jar with dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.gr1tEnt.library_manager.Launcher</mainClass> <!-- Main class for the executable JAR -->
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <!-- Specifies the assembly descriptor for creating a JAR with dependencies -->
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- ID for this execution phase -->
+                        <phase>package</phase> <!-- Binds this execution to the 'package' phase -->
+                        <goals>
+                            <goal>single</goal> <!-- Goal to create a single assembly -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- Dependency for Lombok to generate code (e.g., getters, setters, etc.) -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope> <!-- Lombok is only needed during compilation, not runtime -->
+        </dependency>
+
+        <!-- Dependency for JUnit testing framework -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope> <!-- JUnit is used only during testing -->
+        </dependency>
+
+        <!-- Dependency for SLF4J, a logging facade -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+
+        <!-- Dependency for Logback Classic, a logging implementation for SLF4J -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.12</version>
+        </dependency>
+
+        <!-- Dependency for Logback Core, a core component for Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.5.13</version>
+        </dependency>
+
+        <!-- Dependency for Log4j-SLF4J Bridge to integrate Log4j with SLF4J -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.17.0</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

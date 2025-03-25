@@ -1,0 +1,34 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Pattern for the log output format -->
+            <pattern>%d{dd-MM-YYYY HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/library-manager.log</File> <!-- Log file location -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{dd-MM-YYYY HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+
+        <!-- File rotation policy. FixedWindowRollingPolicy keeps a certain number of files -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- File name pattern -->
+            <FileNamePattern>logs/library-manager.%i.log.zip</FileNamePattern>
+            <MinIndex>0</MinIndex>
+            <MaxIndex>10</MaxIndex> <!-- Maximum number of rolled files to keep -->
+        </rollingPolicy>
+
+        <!-- When the file rotation should occur. Based on a certain condition - file size -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize> <!-- Max size for the log file before rotation -->
+        </triggeringPolicy>
+    </appender>
+
+    <!-- Root logger configuration -->
+    <root level="debug">
+        <appender-ref ref="STDOUT"/> <!-- Attach STDOUT appender for console output -->
+        <appender-ref ref="FILE"/>   <!-- Attach FILE appender for file output -->
+    </root>
+</configuration>
